@@ -16,5 +16,11 @@
     "name": "Page",
     "repeatable": true,
     "value": "page.json"
+  },
+  {
+    "id": "blog",
+    "name": "Blog",
+    "repeatable": true,
+    "value": "blog.json"
   }
 ]

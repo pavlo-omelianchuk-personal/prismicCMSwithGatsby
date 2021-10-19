@@ -2,8 +2,9 @@
 
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
 import { RichText } from 'prismic-reactjs'
-
+import { linkResolver } from '../utils/LinkResolver'
 import { Layout } from '../components/Layout'
 import { Seo } from '../components/Seo'
 import { HomepageBanner } from '../components/HomepageBanner'
@@ -14,7 +15,7 @@ const HomeTemplate = ({ data }) => {
   const doc = data.prismicHomepage.data
 
   return (
-    <Layout isHomepage>
+    <Layout isHomepage={true}>
       <Seo title="Home" />
       <HomepageBanner
         title={RichText.asText(doc.banner_title.raw)}
@@ -31,6 +32,7 @@ const HomeTemplate = ({ data }) => {
 export const query = graphql`
   query MyQuery {
     prismicHomepage {
+      _previewable
       data {
         banner_title {
           raw
@@ -64,4 +66,9 @@ export const query = graphql`
   }
 `
 
-export default HomeTemplate
+export default withPrismicPreview(HomeTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
+    linkResolver,
+  },
+])

@@ -1,5 +1,3 @@
-// {PrismicPage.url}.js file
-
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
@@ -8,42 +6,42 @@ import { Layout } from '../components/Layout'
 import { Seo } from '../components/Seo'
 import { SliceZone } from '../components/SliceZone'
 
-const PageTemplate = ({ data }) => {
+const BlogTemplate = ({ data }) => {
   if (!data) return null
-  const page = data.prismicPage
-
+  const doc = data.prismicBlog
+console.log(data)
   return (
     <Layout>
-      <Seo title={page.data.document_display_name.text} />
-      <SliceZone sliceZone={page.data.body} />
+      <Seo title={doc.data.document_display_namebbb.text} />
+      <SliceZone sliceZone={doc.data.body} />
     </Layout>
   )
 }
 
 export const query = graphql`
-  query PageQuery($id: String) {
-    prismicPage(id: { eq: $id }) {
+  query BlogQuery($id: String) {
+    prismicBlog(id: { eq: $id }) {
       _previewable
       data {
-        document_display_name {
+        document_display_namebbb {
           text
         }
         body {
           ... on PrismicSliceType {
             slice_type
           }
-          ...PageDataBodyText
-          ...PageDataBodyQuote
-          ...PageDataBodyFullWidthImage
-          ...PageDataBodyImageGallery
-          ...PageDataBodyImageHighlight
+          ...BlogDataBodyText
+          ...BlogDataBodyQuote
+          ...BlogDataBodyFullWidthImage
+          ...BlogDataBodyImageGallery
+          ...BlogDataBodyImageHighlight
         }
       }
     }
   }
 `
 
-export default withPrismicPreview(PageTemplate, [
+export default withPrismicPreview(BlogTemplate, [
   {
     repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
     linkResolver,

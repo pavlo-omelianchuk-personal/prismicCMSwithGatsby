@@ -23,6 +23,28 @@ export const ImageHighlight = ({ slice }) => (
 )
 
 export const query = graphql`
+  fragment BlogDataBodyImageHighlight on PrismicBlogDataBodyImageHighlight {
+    primary {
+      featured_image {
+        url
+        alt
+      }
+      title {
+        raw
+      }
+      description {
+        raw
+      }
+      link {
+        url
+        type
+        uid
+      }
+      link_label {
+        raw
+      }
+    }
+  }
   fragment PageDataBodyImageHighlight on PrismicPageDataBodyImageHighlight {
     primary {
       featured_image {

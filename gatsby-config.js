@@ -1,5 +1,3 @@
-// gatsby-config.js file
-
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
@@ -11,6 +9,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-prismic-previews',
+      options: {
+        repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
+      },
+    },
+    {
       resolve: 'gatsby-source-prismic',
       options: {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
@@ -20,6 +24,7 @@ module.exports = {
           homepage: require('./custom_types/homepage.json'),
           navigation: require('./custom_types/navigation.json'),
           page: require('./custom_types/page.json'),
+          blog: require('./custom_types/blog.json'),
         },
       },
     },
